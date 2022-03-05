@@ -199,7 +199,7 @@ class Dependence {
         }
       }, value => { 
         target[dep].change(STATE.REJECTED, value);
-      }) 
+      }); 
     } catch (e) {  
       target[dep].change(STATE.REJECTED, e); 
     } 
@@ -221,7 +221,7 @@ class Dependence {
       const executor = this.#state & STATE.FULFILLED ? onResolve : onReject;
       queueMicrotask(() => {
         if (typeof executor === 'function') { 
-          Dependence.execute(target, resolve => resolve(executor(this.#result)))    
+          Dependence.execute(target, resolve => resolve(executor(this.#result)));   
         } else { 
           target[dep].change(this.#state, this.#result);
         }
